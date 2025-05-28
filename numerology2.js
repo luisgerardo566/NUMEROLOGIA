@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // DEBERÁS COMPLETAR ESTA SECCIÓN CON LOS TEXTOS DEL PDF
     const significadosOmkinKay = {
         esencia_personalidad: {
+            0: "El CERO como regalo OMKIN es la expresión al Universo del nacimiento de niños de la Nueva Era, Seres de Luz, LIBRES DE KARMA",
             1: "Palabra Clave: Bondad. Humildes, viven con el corazón, suaves, auténticos, amorosos, creativos...",
             2: "Palabra Clave: Obediencia. Discípulo por excelencia, les encanta aprender de una sola Fuente, gentiles...",
             3: "Palabra Clave: Positividad. Optimistas, encantadores, sociables, simpáticas, sumamente positivas...",
