@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numerología Omkin-Kay - Cálculo</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header sub-page-header"> <div class="container">
+            <a href="index.html" class="back-link">&larr; Volver al Inicio</a>
+            <h1 class="page-title">Numerología Omkin-Kay</h1>
+        </div>
+    </header>
+
+    <main>
+        <section class="content-section">
+            <div class="container">
+                <h2>Calcula tu Numerología Omkin-Kay</h2>
+                <p>Este sistema se basa en tu fecha de nacimiento para revelar cinco aspectos fundamentales de tu ser y tu camino de vida. Recuerda que los números del 1 al 11 se mantienen, y solo los mayores de 11 se reducen sumando sus dígitos (ej: 13 = 1+3 = 4).</p>
+
+                <div class="calculator-placeholder">
+                    <h4>Ingresa tu Fecha de Nacimiento:</h4>
+                    
+                    <label for="diaNacimientoOK">Día (1-31):</label>
+                    <input type="number" id="diaNacimientoOK" name="diaNacimientoOK" min="1" max="31" class="input-field">
+                    
+                    <label for="mesNacimientoOK">Mes (1-12):</label>
+                    <input type="number" id="mesNacimientoOK" name="mesNacimientoOK" min="1" max="12" class="input-field">
+                    
+                    <label for="anoNacimientoOK">Año (ej: 1990):</label>
+                    <input type="number" id="anoNacimientoOK" name="anoNacimientoOK" min="1000" max="2099" class="input-field"> <button type="button" id="btnCalcularOmkinKay" class="action-button">Calcular Omkin-Kay</button>
+                </div>
+
+                <div id="resultadoOmkinKay" class="resultado-omkin-kay" style="margin-top: 30px;">
+                    <div id="cuadranteEsencia" class="cuadrante-resultado">
+                        <h3>1er Cuadrante: Esencia</h3>
+                        <p><strong>Número:</strong> <span id="numeroEsenciaOK">-</span></p>
+                        <p id="significadoEsenciaOK"></p>
+                    </div>
+                    <hr class="separator-cuadrante">
+                    <div id="cuadrantePersonalidad" class="cuadrante-resultado">
+                        <h3>2do Cuadrante: Personalidad (Ego)</h3>
+                        <p><strong>Número:</strong> <span id="numeroPersonalidadOK">-</span></p>
+                        <p id="significadoPersonalidadOK"></p>
+                    </div>
+                    <hr class="separator-cuadrante">
+                    <div id="cuadranteRegalo" class="cuadrante-resultado">
+                        <h3>3er Cuadrante: Regalo Omkin (Regalo de Dios)</h3>
+                        <p><strong>Número:</strong> <span id="numeroRegaloOK">-</span></p>
+                        <p id="significadoRegaloOK">Este regalo es siempre el aspecto positivo del número y se activa conscientemente.</p>
+                    </div>
+                    <hr class="separator-cuadrante">
+                    <div id="cuadranteVidasPasadas" class="cuadrante-resultado">
+                        <h3>4to Cuadrante: Vidas Pasadas</h3>
+                        <p><strong>Número:</strong> <span id="numeroVidasPasadasOK">-</span></p>
+                        <p id="significadoVidasPasadasOK"></p>
+                    </div>
+                    <hr class="separator-cuadrante">
+                    <div id="cuadranteMision" class="cuadrante-resultado">
+                        <h3>5to Cuadrante: Misión</h3>
+                        <p><strong>Número:</strong> <span id="numeroMisionOK">-</span></p>
+                        <p id="significadoMisionOK"></p>
+                    </div>
+                    <hr class="separator-cuadrante">
+                    <div id="coincidenciasCuadrantesOK" class="coincidencias-resultado" style="margin-top:20px; padding:15px; background-color:#f0e6f6; border-radius:5px;">
+                        <h4>Interpretación de Coincidencias:</h4>
+                        <p id="textoCoincidenciasOK">Aquí se mostrará información si algunos de tus números de cuadrante coinciden.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Numerología Mística. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="numerology.js"></script> </body>
+</html>
