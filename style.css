@@ -1,0 +1,319 @@
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f0f8; /* Un lila muy pálido de fondo */
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    text-align: center;
+    width: 90%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Encabezado */
+.main-header {
+    background-color: #000000; /* Fondo negro para el sistema solar */
+    color: #fff;
+    padding: 40px 0; /* Aumentamos padding para dar espacio al sistema solar */
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative; /* Necesario para el posicionamiento absoluto del sistema solar */
+    overflow: hidden; /* Para contener los elementos del sistema solar */
+    min-height: 300px; /* Altura mínima para que se vea el sistema solar */
+    display: flex; /* Para centrar el contenido del header */
+    align-items: center;
+    justify-content: center;
+}
+
+.header-content {
+    position: relative; /* Para que el título esté sobre el sistema solar */
+    z-index: 10; /* Asegura que el título esté al frente */
+}
+
+.site-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3em;
+    color: #E1BEE7; /* Morado más claro para el título */
+    margin: 0;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Sombra para legibilidad sobre planetas */
+}
+
+.page-title { /* Para otras páginas */
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5em;
+    color: #fff;
+    margin: 10px 0 0 0;
+}
+
+.back-link {
+    display: inline-block;
+    color: #E1BEE7;
+    text-decoration: none;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: #fff;
+}
+
+/* --- Inicio: Estilos del Sistema Solar Adaptados --- */
+.solar-system-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; /* Detrás del contenido del header, pero visible */
+}
+
+.solar-system {
+    position: relative;
+    /* Ajustamos el tamaño para que quepa en el header */
+    /* Puedes experimentar con estos valores */
+    width: 250px; /* Más pequeño para el header */
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0.8); /* Escala general para hacerlo más pequeño */
+}
+
+.sun {
+    width: 50px; /* Sol más pequeño */
+    height: 50px;
+    background-color: #fdd835;
+    border-radius: 50%;
+    box-shadow: 0 0 30px #fdd835, 0 0 50px #fdd835;
+    position: absolute;
+    z-index: 5; /* Sol encima de las órbitas */
+}
+
+.orbit {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px dotted rgba(255, 255, 255, 0.15); /* Órbitas más sutiles */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.planet {
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: 0 0 8px currentColor, 0 0 15px currentColor;
+}
+
+/* Tamaños y órbitas de planetas (ajustados para ser más pequeños) */
+.mercury-orbit {
+    width: 80px; height: 80px;
+    animation: orbit 8.8s linear infinite;
+}
+.mercury {
+    width: 5px; height: 5px; background-color: #B0AFA8;
+    top: -2.5px; /* (orbit_height/2) - (planet_height/2) */
+}
+
+.venus-orbit {
+    width: 120px; height: 120px;
+    animation: orbit 22.5s linear infinite;
+}
+.venus {
+    width: 8px; height: 8px; background-color: #E6B169;
+    top: -4px;
+}
+
+.earth-orbit {
+    width: 170px; height: 170px;
+    animation: orbit 36.5s linear infinite;
+}
+.earth {
+    width: 9px; height: 9px; background-color: #4A90E2;
+    top: -4.5px;
+}
+
+.moon {
+    width: 2px; height: 2px; background-color: #CCCCCC;
+    border-radius: 50%; position: absolute;
+    left: -5px; top: 3.5px; /* Ajustado para la tierra más pequeña */
+    animation: orbit-moon 2.7s linear infinite;
+}
+
+.mars-orbit {
+    width: 220px; height: 220px;
+    animation: orbit 68.7s linear infinite;
+}
+.mars {
+    width: 6px; height: 6px; background-color: #D95C4A;
+    top: -3px;
+}
+
+/* Animación de la órbita (sin cambios) */
+@keyframes orbit {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes orbit-moon {
+    from { transform: rotate(0deg) translateX(6px) rotate(0deg); } /* Radio de órbita luna ajustado */
+    to { transform: rotate(360deg) translateX(6px) rotate(-360deg); }
+}
+/* --- Fin: Estilos del Sistema Solar Adaptados --- */
+
+
+/* Navegación Principal (index.html) */
+.navigation-section {
+    padding: 40px 0;
+    text-align: center;
+    background-color: #fff; /* Mantenemos fondo blanco para esta sección */
+}
+
+.intro-text {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: #4A148C;
+}
+
+.main-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.nav-button {
+    display: inline-block;
+    background-color: #8E24AA;
+    color: #fff;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    min-width: 250px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.nav-button:hover {
+    background-color: #6A1B9A;
+    transform: translateY(-2px);
+}
+
+/* Sección Destacada (index.html) */
+.featured-section {
+    padding: 40px 0;
+    background-color: #EDE7F6;
+}
+
+.featured-section h2 {
+    text-align: center;
+    color: #4A148C;
+    font-family: 'Playfair Display', serif;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.featured-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 20px auto 0 auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+
+/* Contenido de las Páginas Interiores (vida.html, destino.html, significados.html) */
+/* Estos estilos se aplican cuando el header NO tiene el sistema solar */
+/* Para mantener el header morado en las otras páginas, necesitamos una distinción o no aplicar el fondo negro globalmente */
+/* Solución: Las otras páginas usarán un header con su propio estilo si es necesario, o podemos añadir una clase específica al header de index.html */
+
+/* Si queremos que los headers de las otras páginas sigan siendo morados: */
+.sub-page-header { /* Añade esta clase a los headers de vida.html, destino.html, significados.html */
+    background-color: #6A1B9A; /* Morado principal oscuro */
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+/* Y asegúrate de que .page-title y .back-link tengan el color correcto para este fondo */
+.sub-page-header .page-title { color: #fff; }
+.sub-page-header .back-link { color: #E1BEE7; }
+.sub-page-header .back-link:hover { color: #fff; }
+
+
+.content-section {
+    padding: 30px 0;
+    background-color: #fff;
+    border-radius: 8px;
+    margin: 20px auto; /* Centra y da espacio */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.content-section h2, .content-section h3, .content-section h4 {
+    color: #4A148C;
+    font-family: 'Playfair Display', serif;
+}
+.content-section h2 { font-size: 2em; margin-bottom: 20px; }
+.content-section h3 { font-size: 1.6em; margin-top: 30px; margin-bottom: 15px; }
+.content-section h4 { font-size: 1.3em; margin-top: 25px; margin-bottom: 10px; }
+.content-section p, .content-section ul, .content-section table { margin-bottom: 15px; font-size: 1em; }
+.content-section ul { padding-left: 20px; }
+.content-section strong { color: #6A1B9A; }
+.inline-link { color: #8E24AA; text-decoration: none; font-weight: bold; }
+.inline-link:hover { text-decoration: underline; color: #4A148C; }
+
+.numerology-table { width: 100%; border-collapse: collapse; margin: 20px 0; text-align: center; }
+.numerology-table th, .numerology-table td { border: 1px solid #D1C4E9; padding: 10px; }
+.numerology-table th { background-color: #B39DDB; color: #fff; font-weight: bold; }
+.numerology-table td { background-color: #F3E5F5; }
+
+.calculator-placeholder { background-color: #EDE7F6; padding: 20px; border-radius: 8px; margin-top: 20px; border: 1px dashed #B39DDB; }
+.input-field { padding: 10px; margin-right: 10px; margin-bottom: 10px; border: 1px solid #C5CAE9; border-radius: 4px; font-family: 'Inter', sans-serif; }
+.action-button { background-color: #5E35B1; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background-color 0.3s ease; }
+.action-button:hover { background-color: #4527A0; }
+
+.number-meaning { margin-bottom: 30px; padding: 20px; background-color: #F3E5F5; border-left: 5px solid #8E24AA; border-radius: 0 8px 8px 0; }
+.number-meaning h3 { margin-top: 0; }
+.master-number { border-left-color: #D81B60; background-color: #FCE4EC; }
+.master-number h3 { color: #AD1457; }
+.separator { border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(74, 20, 140, 0.75), rgba(0, 0, 0, 0)); margin: 40px 0; }
+
+/* Pie de Página */
+footer {
+    background-color: #311B92;
+    color: #E1BEE7;
+    text-align: center;
+    padding: 25px 0;
+    margin-top: 40px;
+}
+footer p { margin: 0; font-size: 0.9em; }
+
+/* Media Queries para Responsividad */
+@media (min-width: 768px) {
+    .site-title { font-size: 3.5em; }
+    .page-title { font-size: 3em; }
+    .main-nav { flex-direction: row; justify-content: center; gap: 20px; }
+    .nav-button { min-width: auto; }
+    .solar-system { transform: scale(1); /* Tamaño normal en pantallas más grandes */ }
+    .main-header { min-height: 400px; /* Más altura en desktop */ }
+
+}
+
+@media (max-width: 767px) {
+    .site-title { font-size: 2.2em; } /* Título más pequeño en móviles */
+    .solar-system { transform: scale(0.6); /* Aún más pequeño en móviles */ }
+    .main-header { min-height: 250px; padding: 20px 0; }
+}

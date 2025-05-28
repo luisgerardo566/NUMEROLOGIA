@@ -1,0 +1,64 @@
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Número de la Vida - Numerología 2025</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="back-link">&larr; Volver al Inicio</a>
+            <h1 class="page-title">Número de la Vida</h1>
+        </div>
+    </header>
+
+    <main>
+        <section class="content-section">
+            <div class="container">
+                <h2>¿Qué es el Número de la Vida?</h2>
+                <p>El Número de la Vida, también conocido como Número del Sendero Natal, se calcula a partir de tu fecha de nacimiento. Representa tu misión principal en la vida, tus talentos innatos, y los desafíos que podrías enfrentar. Es uno de los números más importantes en la numerología.</p>
+
+                <h3>¿Cómo calcular tu Número de la Vida?</h3>
+                <p>Para calcular tu Número de la Vida, debes sumar los dígitos de tu fecha de nacimiento (día, mes y año) y reducirlos a un solo dígito (del 1 al 9), a menos que el resultado sea un Número Maestro (11, 22 o 33), en cuyo caso no se reduce más.</p>
+                <p><strong>Ejemplo:</strong></p>
+                <p>Fecha de nacimiento: 15 de Mayo de 1988</p>
+                <ul>
+                    <li>Día: 15 &rarr; 1 + 5 = 6</li>
+                    <li>Mes: Mayo (es el 5º mes) &rarr; 5</li>
+                    <li>Año: 1988 &rarr; 1 + 9 + 8 + 8 = 26 &rarr; 2 + 6 = 8</li>
+                </ul>
+                <p>Ahora sumamos los resultados:</p>
+                <p>6 (día) + 5 (mes) + 8 (año) = 19</p>
+                <p>Reducimos el resultado a un solo dígito:</p>
+                <p>1 + 9 = 10 &rarr; 1 + 0 = 1</p>
+                <p>En este ejemplo, el Número de la Vida es <strong>1</strong>.</p>
+
+                <div class="calculator-placeholder">
+                    <h4>Calculadora </h4>
+                    <p>Aquí podrías tener un formulario para que los usuarios ingresen su fecha de nacimiento y se calcule automáticamente su número.</p>
+                    <label for="dia">Día:</label>
+                    <input type="number" id="dia" name="dia" min="1" max="31" class="input-field">
+                    <label for="mes">Mes:</label>
+                    <input type="number" id="mes" name="mes" min="1" max="12" class="input-field">
+                    <label for="ano">Año:</label>
+                    <input type="number" id="ano" name="ano" min="1900" max="2025" class="input-field">
+                    <button type="button" id="btnCalcularVida" class="action-button">Calcular</button>
+                     <div id="resultadoVida" class="resultado-calculo" style="margin-top: 20px; padding: 15px; border: 1px solid #eee; border-radius: 5px; background-color: #f9f9f9;"></div>
+                </div>
+
+                <p>Una vez que tengas tu Número de la Vida, puedes consultar la sección de <a href="significados.html" class="inline-link">Significados de los Números</a> para entender su mensaje.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Numerología Mística. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    <script src="numerology.js"></script>
+</body>
+</html>
