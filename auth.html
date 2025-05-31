@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Registro - Numerología</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos específicos para la página de autenticación */
+        .auth-container {
+            max-width: 450px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .auth-container h2 {
+            text-align: center;
+            color: #4A148C;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 25px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+        }
+        .auth-button-form {
+            background-color: #6A1B9A;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        .auth-button-form:hover {
+            background-color: #4A148C;
+        }
+        .auth-toggle {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .auth-toggle a {
+            color: #6A1B9A;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .auth-message {
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .auth-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .auth-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header sub-page-header">
+        <div class="container">
+            <a href="index.html" class="back-link">&larr; Volver al Inicio</a>
+            <h1 class="page-title">Acceso de Usuarios</h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="auth-container">
+            <div id="login-section">
+                <h2>Iniciar Sesión</h2>
+                <form id="login-form">
+                    <div id="login-message" class="auth-message" style="display:none;"></div>
+                    <div class="form-group">
+                        <label for="login-email">Correo Electrónico:</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Contraseña:</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit" class="auth-button-form">Iniciar Sesión</button>
+                </form>
+                <div class="auth-toggle">
+                    <p>¿No tienes cuenta? <a href="#register" id="show-register">Regístrate aquí</a></p>
+                </div>
+            </div>
+
+            <div id="register-section" style="display:none;">
+                <h2>Crear Cuenta</h2>
+                <form id="register-form">
+                    <div id="register-message" class="auth-message" style="display:none;"></div>
+                    <div class="form-group">
+                        <label for="register-email">Correo Electrónico:</label>
+                        <input type="email" id="register-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Contraseña:</label>
+                        <input type="password" id="register-password" minlength="6" required>
+                    </div>
+                    <button type="submit" class="auth-button-form">Registrarse</button>
+                </form>
+                <div class="auth-toggle">
+                    <p>¿Ya tienes cuenta? <a href="#login" id="show-login">Inicia sesión aquí</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Numerología Mística. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <script>
+        // Inicialización del Cliente de Supabase
+        const SUPABASE_URL = 'https://sbfukuzscasnoezycqmi.supabase.co'; // <-- ¡REEMPLAZA ESTO!
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNiZnVrdXpzY2Fzbm9lenljcW1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg2NTI0MzUsImV4cCI6MjA2NDIyODQzNX0.jcyo8gk2bP61EezSyDJDMBnFclaFW53GAXcqHDwHUMA'; // <-- ¡REEMPLAZA ESTO!
+
+        let supabaseClient = null;
+        try {
+            supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            console.log('Supabase Client inicializado correctamente.');
+            // Aquí puedes verificar si el cliente es válido, aunque createClient no suele fallar por URLs malformadas aquí,
+            // sino cuando intentas hacer una operación.
+             if (!SUPABASE_URL || SUPABASE_URL === 'TU_URL_DE_PROYECTO_SUPABASE') {
+                console.warn('Advertencia: La URL de Supabase no parece estar configurada. Por favor, reemplaza el placeholder.');
+                displayAuthMessage('register-message', 'Error de configuración del cliente Supabase (URL).', 'error');
+                displayAuthMessage('login-message', 'Error de configuración del cliente Supabase (URL).', 'error');
+            }
+            if (!SUPABASE_ANON_KEY || SUPABASE_ANON_KEY === 'TU_CLAVE_ANONIMA_PUBLICA_SUPABASE') {
+                console.warn('Advertencia: La Clave Anónima de Supabase no parece estar configurada. Por favor, reemplaza el placeholder.');
+                 displayAuthMessage('register-message', 'Error de configuración del cliente Supabase (Key).', 'error');
+                 displayAuthMessage('login-message', 'Error de configuración del cliente Supabase (Key).', 'error');
+            }
+
+        } catch (error) {
+            console.error('Error al inicializar Supabase Client:', error);
+            // Mostrar un mensaje de error general en la página si la inicialización falla
+            displayAuthMessage('register-message', 'Error crítico al inicializar el cliente de autenticación.', 'error');
+            displayAuthMessage('login-message', 'Error crítico al inicializar el cliente de autenticación.', 'error');
+        }
+        
+        // Lógica para mostrar/ocultar formularios de login/registro
+        const loginSection = document.getElementById('login-section');
+        const registerSection = document.getElementById('register-section');
+        const showRegisterLink = document.getElementById('show-register');
+        const showLoginLink = document.getElementById('show-login');
+
+        function displayAuthMessage(elementId, message, type) {
+            const messageElement = document.getElementById(elementId);
+            if (messageElement) {
+                messageElement.textContent = message;
+                messageElement.className = 'auth-message ' + type; // 'success' o 'error'
+                messageElement.style.display = 'block';
+            }
+        }
+
+        if (showRegisterLink) {
+            showRegisterLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginSection.style.display = 'none';
+                registerSection.style.display = 'block';
+                window.location.hash = 'register';
+            });
+        }
+
+        if (showLoginLink) {
+            showLoginLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                registerSection.style.display = 'none';
+                loginSection.style.display = 'block';
+                window.location.hash = 'login';
+            });
+        }
+
+        // Determinar qué sección mostrar basado en el ancla de la URL
+        if (window.location.hash === '#register') {
+            if (loginSection) loginSection.style.display = 'none';
+            if (registerSection) registerSection.style.display = 'block';
+        } else { // Por defecto o #login
+            if (loginSection) loginSection.style.display = 'block';
+            if (registerSection) registerSection.style.display = 'none';
+        }
+
+        // --- LÓGICA DE AUTENTICACIÓN (REGISTRO Y LOGIN) ---
+        const registerForm = document.getElementById('register-form');
+        const loginForm = document.getElementById('login-form');
+
+        if (registerForm && supabaseClient) {
+            registerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('register-email').value;
+                const password = document.getElementById('register-password').value;
+                const registerMsgDiv = 'register-message';
+
+                displayAuthMessage(registerMsgDiv, 'Procesando registro...', 'info'); // Mensaje temporal
+
+                try {
+                    const { data, error } = await supabaseClient.auth.signUp({
+                        email: email,
+                        password: password,
+                    });
+
+                    if (error) {
+                        console.error('Error en el registro:', error);
+                        displayAuthMessage(registerMsgDiv, `Error: ${error.message}`, 'error');
+                    } else {
+                        console.log('Usuario registrado:', data.user);
+                        if (data.user && data.user.identities && data.user.identities.length === 0) {
+                             displayAuthMessage(registerMsgDiv, 'Registro exitoso. Por favor, revisa tu correo para confirmar la cuenta (si la confirmación está habilitada en Supabase).', 'success');
+                        } else if (data.session) { // Si Supabase devuelve una sesión directamente (ej. autoConfirm activado)
+                             displayAuthMessage(registerMsgDiv, 'Registro y login exitosos.', 'success');
+                             // Opcional: Redirigir después de un breve retraso
+                             // setTimeout(() => { window.location.href = 'tabla.html'; }, 2000);
+                        } else { // Usuario creado pero necesita confirmación y no hay sesión inmediata
+                             displayAuthMessage(registerMsgDiv, 'Registro exitoso. Por favor, revisa tu correo para confirmar la cuenta.', 'success');
+                        }
+                        registerForm.reset();
+                    }
+                } catch (catchError) {
+                     console.error('Excepción durante el registro:', catchError);
+                     displayAuthMessage(registerMsgDiv, 'Ocurrió un error inesperado durante el registro.', 'error');
+                }
+            });
+        }
+
+        if (loginForm && supabaseClient) {
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                const loginMsgDiv = 'login-message';
+
+                displayAuthMessage(loginMsgDiv, 'Iniciando sesión...', 'info'); // Mensaje temporal
+
+                try {
+                    const { data, error } = await supabaseClient.auth.signInWithPassword({
+                        email: email,
+                        password: password,
+                    });
+
+                    if (error) {
+                        console.error('Error al iniciar sesión:', error);
+                        displayAuthMessage(loginMsgDiv, `Error: ${error.message}`, 'error');
+                    } else {
+                        console.log('Usuario conectado:', data.user);
+                        displayAuthMessage(loginMsgDiv, '¡Inicio de sesión exitoso! Redirigiendo...', 'success');
+                        // Aquí podrías redirigir a la página de tabla.html o a donde necesites
+                        setTimeout(() => {
+                            // Idealmente, aquí rediriges a una página protegida o actualizas la UI
+                            window.location.href = 'index.html'; // O a 'tabla.html' si ya existe
+                        }, 1500); // Pequeño retraso para que el usuario vea el mensaje
+                    }
+                } catch (catchError) {
+                    console.error('Excepción durante el inicio de sesión:', catchError);
+                    displayAuthMessage(loginMsgDiv, 'Ocurrió un error inesperado durante el inicio de sesión.', 'error');
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>
