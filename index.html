@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Numerología 2025 - Inicio</title>
+    <title>Numerología 2025 - Espiral Lilith</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
@@ -12,37 +12,35 @@
         <div class="solar-system-container">
             <div class="solar-system">
                 <div class="sun"></div>
-                <div class="orbit mercury-orbit">
-                    <div class="planet mercury"></div>
-                </div>
-                <div class="orbit venus-orbit">
-                    <div class="planet venus"></div>
-                </div>
-                <div class="orbit earth-orbit">
-                    <div class="planet earth">
-                        <div class="moon"></div>
-                    </div>
-                </div>
-                <div class="orbit mars-orbit">
-                    <div class="planet mars"></div>
-                </div>
-                </div>
+                <div class="orbit mercury-orbit"><div class="planet mercury"></div></div>
+                <div class="orbit venus-orbit"><div class="planet venus"></div></div>
+                <div class="orbit earth-orbit"><div class="planet earth"><div class="moon"></div></div></div>
+                <div class="orbit mars-orbit"><div class="planet mars"></div></div>
+            </div>
         </div>
         <div class="container header-content">
-            <h1 class="site-title">Numerología 2025 Espiral Lilith</h1>
+            <div class="site-title-area">
+                <h1 class="site-title">Numerología 2025</h1>
+                <div class="auth-buttons-header">
+                    <a href="auth.html#login" id="login-header-btn" class="auth-button">Login</a>
+                    <a href="auth.html#register" id="register-header-btn" class="auth-button">Registro</a>
+                    <button type="button" id="logout-header-btn" class="auth-button" style="display:none;">Cerrar Sesión</button>
+                </div>
+            </div>
         </div>
     </header>
 
     <main>
+
         <section class="navigation-section">
             <div class="container">
                 <p class="intro-text">Descubre los secretos que los números tienen para ti este 2025.</p>
-                <nav class="main-nav">
+                <nav class="main-nav" id="main-navigation-links">
                     <a href="vida.html" class="nav-button">Número de la Vida</a>
                     <a href="destino.html" class="nav-button">Número de Destino</a>
                     <a href="significados.html" class="nav-button">Significados de los Números</a>
-                     <a href="omkin-kay.html" class="nav-button">Numerología Omkin-Kay</a> 
-                </nav>
+                    <a href="omkin-kay.html" class="nav-button">Numerología Omkin-Kay</a>
+                    </nav>
             </div>
         </section>
 
@@ -50,15 +48,111 @@
             <div class="container">
                 <h2>Explora tu Interior</h2>
                 <p>La numerología es una herramienta ancestral que te permite conocer tus fortalezas, debilidades, y el propósito de tu alma. A través del estudio de los números asociados a tu vida, puedes desvelar patrones y tendencias que te guiarán en tu camino.</p>
-                 <img src="espiral.jpg" width="300" height="300">
+                 <img src="espiral.jpg" alt="Imagen inspiradora sobre numerología" class="featured-image" style="width: 200px; height: auto; display: block; margin: 20px auto;" onerror="this.onerror=null;this.src='https://placehold.co/600x300/cccccc/FFFFFF?text=Error+al+cargar+imagen';">
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Espiral Lilith.</p>
+            <p>© 2025 Espiral Lilith.</p>
         </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Inicialización del Cliente de Supabase
+        const SUPABASE_URL_INDEX = 'https://sbfukuzscasnoezycqmi.supabase.co'; // Usa tus credenciales reales
+        const SUPABASE_ANON_KEY_INDEX = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNiZnVrdXpzY2Fzbm9lenljcW1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg2NTI0MzUsImV4cCI6MjA2NDIyODQzNX0.jcyo8gk2bP61EezSyDJDMBnFclaFW53GAXcqHDwHUMA'; // Usa tus credenciales reales
+        let supabaseClientIndex = null;
+
+        try {
+            if (SUPABASE_URL_INDEX && SUPABASE_URL_INDEX !== 'TU_URL_DE_PROYECTO_SUPABASE' && SUPABASE_ANON_KEY_INDEX && SUPABASE_ANON_KEY_INDEX !== 'TU_CLAVE_ANONIMA_PUBLICA_SUPABASE') {
+                supabaseClientIndex = supabase.createClient(SUPABASE_URL_INDEX, SUPABASE_ANON_KEY_INDEX);
+                console.log('Supabase Client inicializado en index.html.');
+            } else {
+                console.warn('Advertencia en index.html: Credenciales de Supabase no configuradas. La funcionalidad de sesión no estará disponible.');
+            }
+        } catch (error) {
+            console.error('Error al inicializar Supabase Client en index.html:', error);
+        }
+
+        const loginHeaderBtn = document.getElementById('login-header-btn');
+        const registerHeaderBtn = document.getElementById('register-header-btn');
+        const logoutHeaderBtn = document.getElementById('logout-header-btn');
+        const mainNavLinks = document.getElementById('main-navigation-links');
+        let pacientesBtn = null; // Variable para el botón de pacientes
+
+        async function updateUserUI() {
+            if (!supabaseClientIndex) { // Si Supabase no se inicializó, no hacer nada con la UI de auth
+                if(loginHeaderBtn) loginHeaderBtn.style.display = 'inline-block';
+                if(registerHeaderBtn) registerHeaderBtn.style.display = 'inline-block';
+                if(logoutHeaderBtn) logoutHeaderBtn.style.display = 'none';
+                if (pacientesBtn) pacientesBtn.remove(); // Eliminar si ya existía
+                return;
+            }
+
+            const { data: { session }, error } = await supabaseClientIndex.auth.getSession();
+
+            if (error) {
+                console.error("Error al obtener la sesión:", error);
+                return;
+            }
+
+            if (session) {
+                // Usuario logueado
+                if (loginHeaderBtn) loginHeaderBtn.style.display = 'none';
+                if (registerHeaderBtn) registerHeaderBtn.style.display = 'none';
+                if (logoutHeaderBtn) logoutHeaderBtn.style.display = 'inline-block';
+
+                // Añadir botón de "Mis Pacientes" si no existe
+                if (mainNavLinks && !document.getElementById('pacientes-nav-btn')) {
+                    pacientesBtn = document.createElement('a');
+                    pacientesBtn.href = 'tabla.html'; // Enlace a la futura página
+                    pacientesBtn.textContent = 'Mis Pacientes';
+                    pacientesBtn.classList.add('nav-button');
+                    pacientesBtn.id = 'pacientes-nav-btn';
+                    mainNavLinks.appendChild(pacientesBtn);
+                }
+            } else {
+                // Usuario no logueado
+                if (loginHeaderBtn) loginHeaderBtn.style.display = 'inline-block';
+                if (registerHeaderBtn) registerHeaderBtn.style.display = 'inline-block';
+                if (logoutHeaderBtn) logoutHeaderBtn.style.display = 'none';
+
+                // Eliminar botón de "Mis Pacientes" si existe
+                const existingPacientesBtn = document.getElementById('pacientes-nav-btn');
+                if (existingPacientesBtn) {
+                    existingPacientesBtn.remove();
+                }
+                pacientesBtn = null; // Resetear la variable
+            }
+        }
+
+        if (logoutHeaderBtn && supabaseClientIndex) {
+            logoutHeaderBtn.addEventListener('click', async () => {
+                const { error } = await supabaseClientIndex.auth.signOut();
+                if (error) {
+                    console.error('Error al cerrar sesión:', error.message);
+                } else {
+                    console.log('Sesión cerrada');
+                    updateUserUI(); // Actualizar UI después de cerrar sesión
+                    // Opcional: redirigir a index.html si es necesario, aunque ya estamos aquí
+                    // window.location.href = 'index.html';
+                }
+            });
+        }
+
+        // Verificar estado de sesión al cargar la página y cuando cambie
+        document.addEventListener('DOMContentLoaded', () => {
+            updateUserUI();
+            if (supabaseClientIndex) {
+                supabaseClientIndex.auth.onAuthStateChange((event, session) => {
+                    console.log('Auth state changed:', event, session);
+                    updateUserUI();
+                });
+            }
+        });
+    </script>
 </body>
 </html>
