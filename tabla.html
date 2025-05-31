@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Pacientes - Numerología</title>
+    <link rel="stylesheet" href="style.css"> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos específicos para tabla.html */
+        .page-actions {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        .table-container {
+            overflow-x: auto; /* Para tablas anchas en móviles */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f0e6f6; /* Lila claro para encabezados de tabla */
+            color: #4A148C;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f5fc;
+        }
+        .action-cell button {
+            margin-right: 5px;
+            padding: 6px 10px;
+            font-size: 0.85em;
+        }
+        /* Modal para editar/añadir */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 100; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.5); 
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 25px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+            position: relative;
+        }
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header sub-page-header">
+        <div class="container">
+            <a href="index.html" class="back-link">&larr; Volver al Inicio</a>
+            <h1 class="page-title">Mis Pacientes</h1>
+            <button type="button" id="logout-btn-tabla" class="auth-button" style="margin-left: auto; display: block;">Cerrar Sesión</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="content-section">
+            <div class="container">
+                <div class="page-actions">
+                    <button type="button" id="btnNuevoPaciente" class="action-button" style="background-color: #4CAF50;">+ Añadir Nuevo Paciente</button>
+                </div>
+
+                <div id="mensaje-tabla" class="auth-message" style="display:none;"></div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre Completo</th>
+                                <th>Fecha de Nacimiento</th>
+                                <th>Fecha de Registro</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpoTablaPacientes">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="pacienteModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeModalBtn">&times;</span>
+            <h2 id="modalTitle">Añadir Nuevo Paciente</h2>
+            <form id="pacienteForm">
+                <input type="hidden" id="pacienteId"> <div class="form-group">
+                    <label for="nombreCompleto">Nombre Completo:</label>
+                    <input type="text" id="nombreCompleto" class="input-field" required>
+                </div>
+                <div class="form-group">
+                    <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                    <input type="date" id="fechaNacimiento" class="input-field" required>
+                </div>
+                <button type="submit" id="btnGuardarPaciente" class="auth-button-form">Guardar Paciente</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Numerología Mística. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="tabla-script.js"></script>
+</body>
+</html>
