@@ -67,9 +67,7 @@
         let supabaseClientIndex = null;
 
         try {
-            if (SUPABASE_URL_INDEX && SUPABASE_URL_INDEX !== 'TU_URL_DE_PROYECTO_SUPABASE' && 
-                SUPABASE_ANON_KEY_INDEX && SUPABASE_ANON_KEY_INDEX !== 'TU_CLAVE_ANONIMA_PUBLICA_SUPABASE' &&
-                SUPABASE_URL_INDEX.startsWith('https://') && SUPABASE_ANON_KEY_INDEX.startsWith('ey')) {
+            if (SUPABASE_URL_INDEX && SUPABASE_URL_INDEX !== 'TU_URL_DE_PROYECTO_SUPABASE' && SUPABASE_ANON_KEY_INDEX && SUPABASE_ANON_KEY_INDEX !== 'TU_CLAVE_ANONIMA_PUBLICA_SUPABASE') {
                 supabaseClientIndex = supabase.createClient(SUPABASE_URL_INDEX, SUPABASE_ANON_KEY_INDEX);
                 console.log('Supabase Client inicializado en index.html.');
             } else {
