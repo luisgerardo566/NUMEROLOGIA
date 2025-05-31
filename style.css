@@ -45,7 +45,39 @@ body {
     font-weight: 700;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Sombra para legibilidad sobre planetas */
 }
+/* En style.css */
+.site-title-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* Para el z-index si los botones se superponen al sistema solar */
+    z-index: 11; /* Encima del sistema solar y el título */
+}
 
+.auth-buttons-header {
+    margin-top: 10px;
+    display: flex;
+    gap: 15px;
+}
+
+.auth-button {
+    background-color: #9C27B0; /* Un morado un poco más oscuro o diferente */
+    color: white;
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+    background-color: #7B1FA2;
+}
+
+/* Ajuste para el header principal si es necesario para acomodar los botones */
+.main-header .header-content {
+    /* Puedes necesitar ajustar el padding o la estructura si los botones no caben bien */
+}
 .page-title { /* Para otras páginas */
     font-family: 'Playfair Display', serif;
     font-size: 2.5em;
