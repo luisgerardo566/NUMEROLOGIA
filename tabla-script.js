@@ -6,18 +6,38 @@ document.addEventListener('DOMContentLoaded', async () => {
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNiZnVrdXpzY2Fzbm9lenljcW1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg2NTI0MzUsImV4cCI6MjA2NDIyODQzNX0.jcyo8gk2bP61EezSyDJDMBnFclaFW53GAXcqHDwHUMA'; // ¡REEMPLAZA CON TU KEY REAL!
     let supabaseClient = null;
 
+// En tabla-script.js
+    const SUPABASE_URL = 'https://sbfukuzscasnoezycqmi.supabase.co'; // Tu URL real
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNiZnVrdXpzY2Fzbm9lenljcW1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg2NTI0MzUsImV4cCI6MjA2NDIyODQzNX0.jcyo8gk2bP61EezSyDJDMBnFclaFW53GAXcqHDwHUMA'; // Tu Key real
+    let supabaseClient = null;
+
     try {
-        if (SUPABASE_URL && SUPABASE_URL !== 'TU_URL_DE_PROYECTO_SUPABASE' && SUPABASE_ANON_KEY && SUPABASE_ANON_KEY !== 'TU_CLAVE_ANONIMA_PUBLICA_SUPABASE') {
+        // --- CORRECCIÓN AQUÍ ---
+        if (SUPABASE_URL && SUPABASE_URL.startsWith('https://') &&
+            SUPABASE_ANON_KEY && SUPABASE_ANON_KEY.startsWith('ey')) {
+            
+            // Esta condición ahora solo verifica que las variables tengan valores
+            // y que esos valores PAREZCAN una URL y una Key válidas.
+            // Ya no compara contra los strings placeholders literales.
+
             supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
             console.log('Supabase Client inicializado en tabla-script.js.');
+
         } else {
-            console.warn('Advertencia en tabla-script.js: Credenciales de Supabase no configuradas.');
-            displayMessageTabla('Error de configuración del cliente Supabase. Funcionalidad limitada.', 'error');
-            return; // Detener si no hay cliente
+            // Si entra aquí, es porque SUPABASE_URL o SUPABASE_ANON_KEY están vacías,
+            // o no tienen el formato esperado (no empiezan con "https://" o "ey"),
+            // o todavía son los placeholders literales (si no los hubieras cambiado en las constantes de arriba).
+            console.warn('Advertencia en tabla-script.js: Credenciales de Supabase no configuradas o inválidas. Por favor, verifica.');
+            if (typeof displayMessageTabla === 'function') { // Asegurarse que la función existe
+                 displayMessageTabla('Error de configuración del cliente Supabase. Funcionalidad limitada.', 'error');
+            }
+            return; // Detener si no hay cliente o credenciales válidas
         }
     } catch (error) {
         console.error('Error al inicializar Supabase Client en tabla-script.js:', error);
-        displayMessageTabla('Error crítico al inicializar el cliente de autenticación.', 'error');
+        if (typeof displayMessageTabla === 'function') {
+            displayMessageTabla('Error crítico al inicializar el cliente de autenticación.', 'error');
+        }
         return; // Detener si hay error
     }
 
