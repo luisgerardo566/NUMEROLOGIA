@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // --- ELEMENTOS DEL DOM ---
-    const logoutBtnTabla = document.getElementById('logout-btn-tabla');
     const btnNuevoPaciente = document.getElementById('btnNuevoPaciente');
     const modal = document.getElementById('pacienteModal');
     const closeModalBtn = document.getElementById('closeModalBtn');
@@ -208,20 +207,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // --- MANEJADORES DE EVENTOS ---
-    if (logoutBtnTabla) {
-        logoutBtnTabla.addEventListener('click', async () => {
-            if (!supabaseClient) return;
-            displayMessageTabla('Cerrando sesión...', 'info');
-            const { error } = await supabaseClient.auth.signOut();
-            if (error) {
-                console.error('Error al cerrar sesión:', error.message);
-                displayMessageTabla(`Error al cerrar sesión: ${error.message}`, 'error');
-            } else {
-                console.log('Sesión cerrada');
-                window.location.href = 'index.html'; // Redirigir al inicio
-            }
-        });
-    }
 
     if (btnNuevoPaciente) {
         btnNuevoPaciente.addEventListener('click', () => openModal());
