@@ -235,7 +235,7 @@
                     } else {
                         console.log('Usuario registrado:', data.user);
                         if (data.user && data.user.identities && data.user.identities.length === 0) {
-                             displayAuthMessage(registerMsgDiv, 'Registro exitoso. Por favor, revisa tu correo para confirmar la cuenta (si la confirmación está habilitada en Supabase).', 'success');
+                             displayAuthMessage(registerMsgDiv, 'Registro exitoso. Por favor, revisa tu correo para confirmar la cuenta (una vez que lo confirmes vuelves a entrar a la pagina e incia sesion en login).', 'success');
                         } else if (data.session) { // Si Supabase devuelve una sesión directamente (ej. autoConfirm activado)
                              displayAuthMessage(registerMsgDiv, 'Registro y login exitosos.', 'success');
                              // Opcional: Redirigir después de un breve retraso
