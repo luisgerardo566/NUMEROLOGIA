@@ -111,7 +111,22 @@ document.addEventListener('DOMContentLoaded', async () => {
             pacientes.forEach(paciente => {
                 const fila = cuerpoTablaPacientes.insertRow();
                 fila.insertCell().textContent = paciente.nombre_completo;
-                fila.insertCell().textContent = new Date(paciente.fecha_nacimiento).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
+                let fechaNacFormateada = '-'; // Valor por defecto si la fecha es nula o inválida
+if (paciente.fecha_nacimiento) {
+    const [year, month, day] = paciente.fecha_nacimiento.split('-').map(Number);
+    
+    // 1. Crear el objeto Date interpretando los componentes como UTC
+    const fechaCorrectaUTC = new Date(Date.UTC(year, month - 1, day)); // month - 1 porque los meses son 0-indexados en JavaScript
+
+    // 2. Formatear la fecha para mostrarla, especificando que se interprete como UTC
+    fechaNacFormateada = fechaCorrectaUTC.toLocaleDateString('es-ES', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        timeZone: 'UTC' // MUY IMPORTANTE: trata la fecha como UTC al formatear
+    });
+}
+fila.insertCell().textContent = fechaNacFormateada;
                 fila.insertCell().textContent = new Date(paciente.fecha_registro).toLocaleString('es-ES');
                 
                 const celdaAcciones = fila.insertCell();
